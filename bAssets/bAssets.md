@@ -35,7 +35,7 @@ For fluid arbitrage between secondary markets and the primary market (i.e. the b
 
 ## Supported Messages
 
-Implementations should support five basic operations: Mint, Redeem, ClaimRewards, Send, and ReportSlashing.
+Implementations should support five basic operations: Mint, Burn, Withdraw Rewards, Send, and Report Slashing.
 
 - A user can **mint** a bAsset by sending Assets to the contract, which results in the delegation of the underlying token.
 - A user can **burn** a bAsset by sending a transaction to undelegate underlying tokens and redeem the Assets.
