@@ -20,9 +20,9 @@ In order to maximize liquidity and simplicity, bAssets should be made fungible a
 
 To improve user experience, bAssets should maintain a one-to-one peg with its underlying vanilla Asset, mimicking the price of their underlying Assets.
 
-**Blockchains without slashing**: For blockchains that do not slash, bAssets and Assets should always form a one-to-one peg, without requiring additional insurance or peg maintenance mechanisms.
+- **Blockchains without slashing**: For blockchains that do not slash, bAssets and Assets should always form a one-to-one peg, without requiring additional insurance or peg maintenance mechanisms.
 
-**Blockchains with slashing**: For blockchains that do slash, the one-to-one peg of bAssets may break in a slashing event. However, for these cases, a peg recovery mechanism is required. The peg recovery mechanism should cause the peg to gravitate back to 1:1, assuming constant protocol usage. An additional **insurance mechanism** that fills up slashed tokens in the case of a slashing event is recommended.
+- **Blockchains with slashing**: For blockchains that do slash, the one-to-one peg of bAssets may break in a slashing event. However, for these cases, a peg recovery mechanism is required. The peg recovery mechanism should cause the peg to gravitate back to 1:1, assuming constant protocol usage. An additional **insurance mechanism** that fills up slashed tokens in the case of a slashing event is recommended.
 
 ### 3. Ease of Redemption
 
