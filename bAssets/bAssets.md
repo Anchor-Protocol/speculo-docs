@@ -33,7 +33,7 @@ For fluid arbitrage between secondary markets and the primary market (i.e. the b
 
 
 
-## Protocol-User Interface: Messages
+## Supported Messages
 
 Implementations should support five basic operations: Mint, Redeem, ClaimRewards, Send, and ReportSlashing.
 
@@ -47,21 +47,21 @@ Given all five operations are asynchronous, operations are designed in an init /
 
 ### Mint
 
-- `Delegate{validator, amount}` - Moves `amount` Assets from the `env.sender` account to the `contract` account. Moved Assets are delegated to the `validator` account from the `contract` account. The `validator` field is optional and can be left blank if an algorithm for automatic delegations exist.
+- `InitiateMint{validator, amount}` - Moves `amount` Assets from the `env.sender` account to the `contract` account. Moved Assets are delegated to the `validator` account from the `contract` account. The `validator` field is optional and can be left blank if an algorithm for automatic delegations exist.
 
-- `Mint{msg_proof, amount}` - Verifies the validity of a delegation request having size `amount` using `msg_proof`. Creates a corresponding number of new bAssets and adds them to the `env.sender` account.
+- `FinishMint{msg_proof, amount}` - Verifies the validity of a delegation request having size `amount` using `msg_proof`. Creates a corresponding number of new bAssets and adds them to the `env.sender` account.
 
-### Claim Rewards
+### Withdraw Rewards
 
-- `ClaimRewards{}` - Claims staking rewards from validators to the `contract` account.
+- `InitiateRewardWithdrawal{}` - Claims staking rewards from validators to the `contract` account.
 
-- `WithdrawRewards{msg_proof}` - Verifies whether staking rewards have been claimed using `msg_proof`. Moves a corresponding amount of claimed rewards (denominated in Assets) to the `env.sender` account.
+- `FinishRewardWithdrawal{msg_proof}` - Verifies whether staking rewards have been claimed using `msg_proof`. Moves a corresponding amount of claimed rewards (denominated in Assets) to the `env.sender` account.
 
 ### Burn
 
-- `Undelegate{validator, amount}` - Burns `amount` bAssets and relays a transaction that undelegates a corresponding number of Assets from the `validator` account. The `validator` field is optional and can be left blank if an algorithm for automatic undelegations exist.
+- `InitiateBurn{validator, amount}` - Burns `amount` bAssets and relays a transaction that undelegates a corresponding number of Assets from the `validator` account. The `validator` field is optional and can be left blank if an algorithm for automatic undelegations exist.
 
-- `Redeem{msg_proof, amount}` - Verifies the validity of an undelegation request using `msg_proof`. Moves undelegated Assets to the `env.sender` account. This message triggers the `ClaimRewards{}` message, crediting all previously accrued staking rewards to the `env.sender` account.
+- `FinishBurn{msg_proof, amount}` - Verifies the validity of an undelegation request using `msg_proof`. Moves undelegated Assets to the `env.sender` account. This message triggers the `ClaimRewards{}` message, crediting all previously accrued staking rewards to the `env.sender` account.
 
 ### Send
 
@@ -72,14 +72,14 @@ Given all five operations are asynchronous, operations are designed in an init /
 - `ReportSlashing{msg_proof, validator, amount, block_height}` - Verifies the validity of a reported slashing event using `msg_proof`. Deducts `amount` Assets from the Map recording current delegations. This message triggers the insurance / peg recovery mechanism, updating the bAsset to Asset conversion rate.
 
 
-## Protocol-User Interface: Queries
+## Supported Queries
 
 The protocol must also allow certain queries to be made, allowing other applications to be aware of their internals.
 
-- `TotalbAssetSupply` - The total number of bAssets issued by the bAsset system. This value should be equal to `TotalAssetsDelegated` on initial system setup (maintaining a one-to-one peg), but upon further usage, this should be equal to `TotalAssetsDelegated` * `ExchangeRatio`.
+- `TotalSupply` - The total number of bAssets issued by the bAsset system. This value should be equal to `TotalAssetsDelegated` on initial system setup (maintaining a one-to-one peg), but upon further usage, this should be equal to `TotalAssetsDelegated` * `ExchangeRatio`.
 
-- `TotalAssetsDelegated` - The total number of assets delegated and being managed by the bAsset system. On a slashing event, this value will decrease, invoking either insurance or peg maintenance logic.
+- `TotalDelegated` - The total number of assets delegated and being managed by the bAsset system. On a slashing event, this value will decrease, invoking either insurance or peg maintenance logic.
 
-- `ExchangeRatio` - The bAsset to vanilla Asset exchange rate, updated in the case of staked vanilla Assets being slashed. This value is managed by the peg maintenance logic, and should be calculated as `TotalbAssetSupply` / `TotalAssetsDelegated`. 
+- `ExchangeRate` - The bAsset to vanilla Asset exchange rate, updated in the case of staked vanilla Assets being slashed. This value is managed by the peg maintenance logic, and should be calculated as `TotalbAssetSupply` / `TotalAssetsDelegated`. 
 
 - `Balance{Account}` - The number of bAssets being held by a particular user account.
