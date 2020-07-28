@@ -1,8 +1,8 @@
-# Bridge Specification
+# Cross-chain Messaging Specification 
 
-A bridge for cross-chain token transfers enables the value of bAssets to be utilized regardless of the underlying blockchain. This dramatically increases the usefulness of bAssets, as assets are no longer siloed on its own blockchain and can be freely transferred to systems running on other blockchains - such as Anchor. Using the bridge, value locked up in staking within non-Terra blockchains can be held up as collateral on the Anchor system.
+A bridge for cross-chain communication enables the value of bAssets to be utilized regardless of the underlying blockchain. This dramatically increases the usefulness of bAssets, as assets are no longer siloed on its own blockchain and can be freely transferred to systems running on other blockchains - such as Anchor. Using the bridge, value staked across many blockchains can be held up as collateral on the Anchor system.
 
-While there are multiple approaches to linking blockchains together - including Tendermint’s Inter-Blockchain Communication (IBC) - Anchor should be able to support arbitrary assets that do not support generalized bidirectional transaction verification. Such assets include blockchains that do not support Smart Contract functionality, and/or has a block finality mechanism that is difficult to deterministically verify on another blockchain. As such, Speculo’s Bridge specification defines the bare minimum requirements for integrating non-Terra assets onto the Anchor system, without having to implement consensus-level message transmission.
+While there are multiple approaches to linking blockchains together - including Tendermint’s Inter-Blockchain Communication (IBC) - Anchor should be able to work with arbitrary bridges that do not support generalized bidirectional transaction verification. Such bridges will span across blockchains that do not support Smart Contract functionality, and/or has a block finality mechanism that is difficult to deterministically verify on another blockchain. As such, Speculo’s messaging specification defines the bare minimum requirements for integrating foreign blockchain assets onto the Anchor system.
 
 ## Required Properties
 
