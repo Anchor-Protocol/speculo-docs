@@ -43,7 +43,7 @@ Implementations should support five basic operations: Mint, Burn, Withdraw Rewar
 - A user can **send** a bAsset to a different address and claim all prior staking rewards up to that point.
 - A user can **report a slashing event** to the protocol.
 
-Given all five operations are asynchronous, operations are designed in an init / finish architecture for staking related transactions: (Delegate / Mint), (Undelegate / Redeem), (ClaimRewards / WithdrawRewards). Staking transactions are first initiated by the protocol’s staking logic, and state changes occur when the transaction is verified to have successfully completed by the finish transactions.
+Given all five operations are asynchronous, operations are designed in an init / finish architecture for staking related transactions: (InitiateMint / FinishMint), (InitiateBurn / FinishBurn), (InitiateRewardWithdrawal / FinishRewardWithdrawal). Staking transactions are first initiated by the protocol’s staking logic, and state changes occur when the transaction is verified to have successfully completed by the finish transactions.
 
 ### Mint
 
